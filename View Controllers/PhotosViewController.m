@@ -23,7 +23,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.rowHeight = 240;
+    self.tableView.rowHeight = 286;
     [self fetchPosts];
 }
 
@@ -63,8 +63,9 @@
     NSArray *photos = post[@"photos"];
     if(photos){
         NSDictionary *photo = photos[0];
-        NSDictionary *originalSize =  photo[@"original_size"];
-        NSString *urlString = originalSize[@"url"];
+        NSArray *altSizes =  photo[@"alt_sizes"];
+        NSDictionary *smallSize = altSizes[6];
+        NSString *urlString = smallSize[@"url"];
         NSURL *url = [NSURL URLWithString:urlString];
         
         [cell.postPicView setImageWithURL:url];
